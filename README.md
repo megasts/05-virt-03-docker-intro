@@ -87,7 +87,7 @@ https://hub.docker.com/repository/docker/megasts/custom-nginx/general
 
   ![Screenshot3_5](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot3_5.png)
 
-  Суть проблемы в том, что мы изменили порт, который слушает nginx с 80 на 81, а сопоставление портов запущенного докер контейнера и хостовой машины оставили преджними.
+  Суть проблемы в том, что мы изменили порт, который слушает nginx, с 80 на 81, а сопоставление портов запущенного докер контейнера и хостовой машины оставили преджними.
 
   - п. 12
 
@@ -226,8 +226,6 @@ services:
 ![Screenshot5_7](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_7.png)
 
 Суть предупреждения ```Found orphan containers ([task_5-registry-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.``` в том, что найдены контейнеры, которые не описаны в файле. Для их очистки нужно выполнить ту же команду с флагом --remove-orphans.
-
----
 
 ---
 
