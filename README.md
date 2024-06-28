@@ -107,6 +107,13 @@ https://hub.docker.com/repository/docker/megasts/custom-nginx/general
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
+---
+### Ответ
+
+![Screenshot4_1](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot4_1.png)
+
+---
+
 
 ## Задача 5
 
@@ -156,6 +163,71 @@ services:
 7. Удалите любой из манифестов компоуза(например compose.yaml).  Выполните команду "docker compose up -d". Прочитайте warning, объясните суть предупреждения и выполните предложенное действие. Погасите compose-проект ОДНОЙ(обязательно!!) командой.
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод, файл compose.yaml , скриншот portainer c задеплоенным компоузом.
+
+---
+### Ответ
+
+1. 
+  ![Screenshot5_1](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_1.png)
+
+По умолчанию путь к файлу Compose: compose.yaml (предпочтительный) или compose.yml. Compose также поддерживает docker-compose.yaml и docker-compose.yml для обеспечения обратной совместимости с более ранними версиями. Если в рабочем каталоге оба файла, Compose предпочитает compose.yaml.
+
+2. Отредактированный файл compose.yaml так, чтобы были запущенны оба файла.
+
+```yaml
+version: "3"
+
+include:
+  - docker-compose.yaml
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    network_mode: host
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+```
+
+![Screenshot5_2](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_2.png)
+
+3.
+  3.1. Скачиваем образ custom-nginx:
+
+  ![Screenshot5_3_1](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_3_1.png)
+
+  3.2. Меняем тэг и заливаем образ в локальное registry:
+
+  ![Screenshot5_3_2](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_3_2.png)
+
+  3.3. Для проверки удаляем образы custom-nginx:
+
+  ![Screenshot5_3_3](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_3_3.png)
+
+  3.4. Скачиваем с локальное registry:
+
+  ![Screenshot5_3_4](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_3_4.png)
+
+4. 
+
+![Screenshot5_4](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_4.png)
+
+5. 
+
+![Screenshot5_5](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_5.png)
+
+6. 
+
+![Screenshot5_6](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_6.png)
+
+7. После удаления файла docker-compose.yaml:
+
+![Screenshot5_7](https://github.com/megasts/05-virt-03-docker-intro/blob/main/img/Screenshot5_7.png)
+
+Суть предупреждения ```Found orphan containers ([task_5-registry-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.``` в том, что найдены контейнеры, которые не описаны в файле. Для их очистки нужно выполнить ту же команду с флагом --remove-orphans.
+
+---
 
 ---
 
